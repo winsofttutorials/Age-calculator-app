@@ -12,40 +12,166 @@
       <section class="age-frame">
         <div class="date-section">
           <div>
-            <label>DAY</label>
-            <input type="text" placeholder="DD" class="userInput" />
+            <label id="labelDay">DAY</label>
+            <input
+              type="text"
+              placeholder="DD"
+              class="userInput"
+              minlength="1"
+              maxlength="2"
+              required
+              id="day"
+            />
+            <small id="errorText"></small>
           </div>
           <div>
-            <label>MONTH</label>
-            <input type="text" placeholder="MM" class="userInput" />
+            <label id="labelMonth">MONTH</label>
+            <input
+              type="text"
+              placeholder="MM"
+              class="userInput"
+              minlength="1"
+              maxlength="2"
+              required
+              id="month"
+            />
+            <small id="errorMText"></small>
           </div>
           <div>
-            <label>YEAR</label>
-            <input type="text" placeholder="YYYY" class="userInput" />
+            <label id="labelYear">YEAR</label>
+            <input
+              type="text"
+              placeholder="YYYY"
+              class="userInput"
+              minlength="4"
+              maxlength="4"
+              required
+              id="year"
+            />
+            <small id="errorYText"></small>
           </div>
         </div>
         <div class="line-share">
           <hr />
-          <span><img src="assets/images/icon-arrow.svg" alt="" /></span>
+          <span
+            ><img
+              src="assets/images/icon-arrow.svg"
+              alt=""
+              onclick="sortDate()"
+          /></span>
         </div>
         <div class="result-section">
           <div class="result">
-            <p><i>-</i></p>
-            <p><i>-</i></p>
+            <p id="years"><i>- -</i></p>
             <h1><i>years</i></h1>
           </div>
           <div class="result">
-            <p><i>-</i></p>
-            <p><i>-</i></p>
+            <p id="months"><i>- -</i></p>
             <h1><i>months</i></h1>
           </div>
           <div class="result">
-            <p><i>-</i></p>
-            <p><i>-</i></p>
+            <p id="days"><i>- -</i></p>
             <h1><i>days</i></h1>
           </div>
         </div>
       </section>
     </main>
+
+    <script>
+      function sortDate() {
+        var d1 = document.getElementById("day").value;
+        var m1 = document.getElementById("month").value;
+        var y1 = document.getElementById("year").value;
+
+        function colorSet() {
+          document.getElementById("errorText").innerHTML =
+            "This field is required";
+          document.getElementById("day").style.borderColor =
+            "hsl(0, 100%, 67%)";
+          document.getElementById("labelDay").style.color = "hsl(0, 100%, 67%)";
+
+          document.getElementById("errorMText").innerHTML =
+            "This field is required";
+          document.getElementById("month").style.borderColor =
+            "hsl(0, 100%, 67%)";
+          document.getElementById("labelMonth").style.color =
+            "hsl(0, 100%, 67%)";
+
+          document.getElementById("errorYText").innerHTML =
+            "This field is required";
+          document.getElementById("year").style.borderColor =
+            "hsl(0, 100%, 67%)";
+          document.getElementById("labelYear").style.color =
+            "hsl(0, 100%, 67%)";
+        }
+
+        function colorReSet() {
+          document.getElementById("errorText").innerHTML = "";
+          document.getElementById("day").style.borderColor = "hsl(0, 0%, 86%)";
+          document.getElementById("labelDay").style.color = "black";
+
+          document.getElementById("errorMText").innerHTML = "";
+          document.getElementById("month").style.borderColor =
+            "hsl(0, 0%, 86%)";
+          document.getElementById("labelMonth").style.color = "black";
+
+          document.getElementById("errorYText").innerHTML = "";
+          document.getElementById("year").style.borderColor = "hsl(0, 0%, 86%)";
+          document.getElementById("labelYear").style.color = "black";
+        }
+
+        function ErrorMsg() {
+          document.getElementById("errorText").innerHTML =
+            "Must be a valid date";
+          document.getElementById("day").style.borderColor = "hsl(0, 0%, 86%)";
+          document.getElementById("labelDay").style.color = "hsl(0, 100%, 67%)";
+
+          document.getElementById("errorMText").innerHTML =
+            "Must be a valid month";
+          document.getElementById("month").style.borderColor =
+            "hsl(0, 0%, 86%)";
+          document.getElementById("labelMonth").style.color =
+            "hsl(0, 100%, 67%)";
+
+          document.getElementById("errorYText").innerHTML =
+            "Must be in the past";
+          document.getElementById("year").style.borderColor = "hsl(0, 0%, 86%)";
+          document.getElementById("labelYear").style.color =
+            "hsl(0, 100%, 67%)";
+        }
+
+        if (!d1 && !m1 && !y1) {
+          colorSet();
+        } else if (d1 > 31 || m1 > 12 || y1 > y2) {
+          ErrorMsg();
+        } else if (d1 && m1 && y1) {
+          colorReSet();
+          var date = new Date();
+          //Collecting current date of your device
+          var d2 = 1 + date.getDate();
+          var m2 = 1 + date.getMonth();
+          var y2 = date.getFullYear();
+          var month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+          if (d1 > d2) {
+            d2 = d2 + month[m2 - 1];
+            m2 = m2 - 1;
+          }
+
+          if (m1 > m2) {
+            m2 = m2 + 12;
+            y2 = y2 - 1;
+          }
+
+          var d = d2 - d1;
+          var m = m2 - m1;
+          var y = y2 - y1;
+
+          document.getElementById("years").innerHTML = y;
+          document.getElementById("months").innerHTML = m;
+          document.getElementById("days").innerHTML = d;
+        }
+      }
+    </script>
   </body>
 </html>
