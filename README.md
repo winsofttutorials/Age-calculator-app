@@ -95,7 +95,7 @@ I would also like to continue working on this design to give the next birthday d
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for the logic behind getting the date and how to go about the user age calculation. I really liked this pattern and will use it going forward.
+- [Example resource 1](https://youtu.be/w6-9PfboI2g) - This helped me for the logic behind getting the date and how to go about the user age calculation. I really liked this pattern and will use it going forward.
 
 ## Author
 
